@@ -1,19 +1,32 @@
 {
   "accounts": [
     {
-      "name": "hungzai22 (Acc 1)",
+      "name": "Acc 1 (hungzai22)",
       "uid": 7744031191,
-      "init_data": "query_id=...&user=%7B%22id%22%3A7744031191%7D"
+      "api_id": 39182276,
+      "api_hash": "f02b155d895a3a3fbf8a1cbe810b5338",
+      "session_str": "1BVtsOHIBuxmpWiBJ9hvwV9pSrzWw5U2I5Fe20Ww8l1LCk9rnsG6T6lLZEJXZE1JJC_qUH_yyWHnRoedRNI5lJYnfjRN4gyGeDrCxquDU12ZflrpCz0VLhMZx2C0LlyUCy2eHRSRE1wUCpEYZaymL0P7Z9eAHwMy4Oogewh5TqyO4x4MF6j0yTq8Zvfpv43O4aQDzErNv3GRqpx8DXBcOJIMP9yVhq-Mby5VH5J9cF-h-bJ5ws3xKjA4GY7YKjHxDt9OI-Zr7mr-V3qZy99UxJooThJj51f2RqOKhODdLh9XZQ0ygSoAd3iFAZDOPMEo8Ch5TrrzLXi2Q3N0HorIL1JfV0xoFQlY="
     },
     {
-      "name": "gaylobucu (Acc 2)",
-      "uid": null,
-      "init_data": "query_id=...&user=%7B%22id%22%3Agaylobucu%7D"
+      "name": "Acc 2 (gaylobucu)",
+      "uid": 8431197387,
+      "api_id": 39182276,
+      "api_hash": "f02b155d895a3a3fbf8a1cbe810b5338",
+      "session_str": "1BVtsOHIBuzoeRtBOmpNGh2sdyxpZ5e0nY4MrFe-6KKbmJPaM0YnCJiKRI0L9mEh1C5rwqLQqucj456LRF7vV1YIPjZNqL6JevLM0Ww3FTml1NoKdwsiPINfsy9MbBlBhKOvha7py44L4pK5aEXjwpjpoNj4LaSmtWaPiQPufJuTwPB86f4gYjSeXM3HtxhnFU7MtHR5vbZPBa9N2HQSlt2BMB47q00DbQVtvYA37R3R-TrtV2MtwixL9ozChADFq38NYcw4eRyRwKrkobVLccvz0_hvqgHXiQbrfcFLLRkRGwGlRCB-Ew4YhLLdnCbG1hjGEfxUrp9MRmF0JvS-u20MfAuvlcgQ="
     },
     {
-      "name": "Wind_trader (Acc 4)",
-      "uid": null,
-      "init_data": "query_id=...&user=%7B%22id%22%3AWind_trader%7D"
+      "name": "Acc 3 (phanhoang)",
+      "uid": 8896084050,
+      "api_id": 39182276,
+      "api_hash": "f02b155d895a3a3fbf8a1cbe810b5338",
+      "session_str": "1BVtsOHIBuxrTG6Dt9a8C_J7D3bm1disV_mQiY_mw7AP5Gp-cEVAlKU1cfvOJiDnU6yi7PInfBRG_wJBQ3uNc-1kOa8fM3ITgUcE7YkaCd77FoBTgIFqw6gMYeRfVJOS1U9S_botQyX5764dx94NBfHHm8HuQKejs0PrdAJQq6WUTDS3mkijWRWIvO4SwXSUrM5yNOFoGIrav8Mbuyl5ZFQaDPg_kwa11NT4kiqov8rVx0virTbGbQudyFeG80kP4zW2CxcuL6TObemIPJgR_2-jb8zVQRQMiI4oN829ZCfHU2JCQY2S2clWwI7onZV8AhYP1LoDBiu32dgQPuk4brS-r1DtkySc="
+    },
+    {
+      "name": "Acc 4 (Wind_trader)",
+      "uid": 8735204819,
+      "api_id": 34333329,
+      "api_hash": "4f9371f95000578c84dbc670aaf1f819",
+      "session_str": "1BVtsOIIBuzNuH5Jfb4Uwek2dG7YRqSyFk-74KTokth0VB3_UTMwM8Edh_ikn83fJOGyN7JaWzIZXnro3icoY8zsjYIlT5nQ4z_GgKknABQ74FRseCvNbz3yyTkPOfQ4xJfZnJIJHuY4EkzVOzQzYZFg_EJWOj_vvg6OVwSkQv9Nd52tl_SlH4TofoxDXDNvxLJyFcoQFH6BegTybx-pFyX2tz0rMeR7AQujnGxqdWOd4zywoFVShzsCTFeqdsBP9itJvg1YB0ISmJEYXzGEQo37IddAFGw3PJcAIY4BBctxri9_Cw-FbxhMgLU9gsotA3Rrys2jLcGV4CGfOp_IzD0CmtNm845I="
     }
   ]
 }
