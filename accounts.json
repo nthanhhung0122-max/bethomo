@@ -1,0 +1,19 @@
+{
+  "accounts": [
+    {
+      "name": "hungzai22 (Acc 1)",
+      "uid": 7744031191,
+      "init_data": "query_id=...&user=%7B%22id%22%3A7744031191%7D"
+    },
+    {
+      "name": "gaylobucu (Acc 2)",
+      "uid": null,
+      "init_data": "query_id=...&user=%7B%22id%22%3Agaylobucu%7D"
+    },
+    {
+      "name": "Wind_trader (Acc 4)",
+      "uid": null,
+      "init_data": "query_id=...&user=%7B%22id%22%3AWind_trader%7D"
+    }
+  ]
+}
