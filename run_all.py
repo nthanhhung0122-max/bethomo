@@ -5,15 +5,26 @@ import os
 import requests
 from bot import BeThoMoBot
 
-GITHUB_TOKEN = os.getenv("GH_PAT") or os.getenv("GITHUB_TOKEN")
+GITHUB_TOKEN = os.getenv("GH_PAT")
 GITHUB_REPOSITORY = os.getenv("GITHUB_REPOSITORY", "nthanhhung0122-max/bethomo")
 RUNNER_TIMEOUT_SECONDS = 5 * 3600  # Chạy 5 tiếng mỗi runner
 LOOP_DELAY_SECONDS = 300  # 5 phút quét lặp lại 1 lần cho cả 3 acc
 
+def load_accounts():
+    """Đọc danh sách tài khoản. Session/api_hash chỉ lấy từ secret, không từ file public."""
+    raw = os.getenv("TELEGRAM_ACCOUNTS_JSON")
+    if raw:
+        return json.loads(raw)["accounts"]
+    for path in ("accounts.local.json", "accounts.json"):
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)["accounts"]
+    raise FileNotFoundError("Không có TELEGRAM_ACCOUNTS_JSON và không tìm thấy accounts.local.json")
+
 def trigger_next_runner():
     """Kích hoạt ca trực tiếp theo trên GitHub Actions trước khi runner này hết giờ (Handover Chaining 24/7)"""
     if not GITHUB_TOKEN:
-        print("[Handover] Không tìm thấy GITHUB_TOKEN, bỏ qua trigger.", flush=True)
+        print("[Handover] Thiếu secret GH_PAT. GITHUB_TOKEN mặc định không tạo được workflow run mới nên 24/7 sẽ dừng sau ca này.", flush=True)
         return
     url = f"https://api.github.com/repos/{GITHUB_REPOSITORY}/actions/workflows/auto_run.yml/dispatches"
     headers = {
@@ -44,10 +55,14 @@ def main():
             break
 
         try:
-            with open('accounts.json', 'r', encoding='utf-8') as f:
-                accs = json.load(f)['accounts']
+            accs = load_accounts()
         except Exception as e:
-            print(f"Lỗi đọc accounts.json: {e}", flush=True)
+            print(f"Lỗi đọc danh sách tài khoản: {e}", flush=True)
+            break
+
+        missing = [a["name"] for a in accs if not a.get("session_str")]
+        if missing:
+            print(f"Thiếu session_str cho: {', '.join(missing)}. Kiểm tra secret TELEGRAM_ACCOUNTS_JSON.", flush=True)
             break
 
         print(f"\n--- [{time.strftime('%Y-%m-%d %H:%M:%S')}] BẮT ĐẦU VÒNG QUÉT TẤT CẢ TÀI KHOẢN ---", flush=True)

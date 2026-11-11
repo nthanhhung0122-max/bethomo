@@ -12,9 +12,10 @@ class BeThoMoBot:
     def __init__(self, acc):
         self.name = acc['name']
         self.uid = acc['uid']
-        self.session_str = acc.get('session_str')
+        self.session_str = acc.get('session_str') or os.getenv(f"TELEGRAM_STRING_SESSION_ACC{acc.get('slot', '')}") or ''
         self.api_id = acc.get('api_id', 39182276)
-        self.api_hash = acc.get('api_hash', 'f02b155d895a3a3fbf8a1cbe810b5338')
+        self.api_hash = acc.get('api_hash') or os.getenv('TELEGRAM_API_HASH') or ''
+        self.unban_email = os.getenv('UNBAN_EMAIL') or ''
         self.base_url = "https://api-bethomo.vercel.app/api"
         self.fb_url = f"https://be-tho-mo-default-rtdb.asia-southeast1.firebasedatabase.app/users/{self.uid}.json"
         self.init_data = None
@@ -31,7 +32,8 @@ class BeThoMoBot:
 
     def refresh_init_data(self):
         """Lấy init_data tươi từ Telegram WebApp qua Telethon"""
-        if not self.session_str:
+        if not self.session_str or not self.api_hash:
+            print(f"[{self.name}] ❌ Thiếu session_str hoặc api_hash (kiểm tra secret TELEGRAM_ACCOUNTS_JSON).", flush=True)
             return False
         try:
             client = TelegramClient(StringSession(self.session_str), self.api_id, self.api_hash)
@@ -100,12 +102,15 @@ class BeThoMoBot:
     def request_unban_if_needed(self, profile):
         """Tự động gửi yêu cầu mở khóa nếu tài khoản bị khóa nhầm"""
         if profile and profile.get("isBanned"):
+            if not self.unban_email:
+                print(f"[{self.name}] ⚠️ Tài khoản bị gắn cờ isBanned=True nhưng chưa cấu hình UNBAN_EMAIL, bỏ qua.", flush=True)
+                return
             print(f"[{self.name}] ⚠️ Tài khoản đang bị gắn cờ isBanned=True. Đang gửi đơn Unban...", flush=True)
             try:
                 r = requests.post(
                     f"{self.base_url}/request_unban",
                     headers=self.headers,
-                    json={"email": "nthanhhung0122@gmail.com"},
+                    json={"email": self.unban_email},
                     timeout=15
                 )
                 print(f"[{self.name}] Kết quả gửi đơn Unban: {r.text}", flush=True)

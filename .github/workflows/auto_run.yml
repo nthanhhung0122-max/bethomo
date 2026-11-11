@@ -5,6 +5,12 @@ on:
     - cron: '0 */5 * * *'
   workflow_dispatch:
 
+# Chỉ 1 run active trong group. GitHub giữ tối đa 1 run đang chờ và tự huỷ
+# run chờ cũ hơn, nên cron 5 phút chỉ hoạt động như watchdog, không chồng ca.
+concurrency:
+  group: bethomo-engine
+  cancel-in-progress: false
+
 jobs:
   run-bot:
     runs-on: ubuntu-latest
@@ -18,6 +24,9 @@ jobs:
         run: pip install requests telethon
       - name: Run 24/7 Engine
         env:
-          GH_PAT: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          PYTHONUNBUFFERED: "1"
+          GH_PAT: ${{ secrets.GH_PAT }}
           GITHUB_REPOSITORY: nthanhhung0122-max/bethomo
+          TELEGRAM_ACCOUNTS_JSON: ${{ secrets.TELEGRAM_ACCOUNTS_JSON }}
+          UNBAN_EMAIL: ${{ secrets.UNBAN_EMAIL }}
         run: python run_all.py
