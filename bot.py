@@ -15,7 +15,7 @@ class BeThoMoBot:
         self.session_str = acc.get('session_str') or os.getenv(f"TELEGRAM_STRING_SESSION_ACC{acc.get('slot', '')}") or ''
         self.api_id = acc.get('api_id', 39182276)
         self.api_hash = acc.get('api_hash') or os.getenv('TELEGRAM_API_HASH') or ''
-        self.unban_email = os.getenv('UNBAN_EMAIL') or ''
+        self.unban_email = acc.get('unban_email') or os.getenv('UNBAN_EMAIL') or ''
         self.base_url = "https://api-bethomo.vercel.app/api"
         self.fb_url = f"https://be-tho-mo-default-rtdb.asia-southeast1.firebasedatabase.app/users/{self.uid}.json"
         self.init_data = None
@@ -105,7 +105,7 @@ class BeThoMoBot:
             if not self.unban_email:
                 print(f"[{self.name}] ⚠️ Tài khoản bị gắn cờ isBanned=True nhưng chưa cấu hình UNBAN_EMAIL, bỏ qua.", flush=True)
                 return
-            print(f"[{self.name}] ⚠️ Tài khoản đang bị gắn cờ isBanned=True. Đang gửi đơn Unban...", flush=True)
+            print(f"[{self.name}] ⚠️ Tài khoản đang bị gắn cờ isBanned=True. Đang gửi đơn Unban với email: {self.unban_email}...", flush=True)
             try:
                 r = requests.post(
                     f"{self.base_url}/request_unban",
@@ -113,7 +113,7 @@ class BeThoMoBot:
                     json={"email": self.unban_email},
                     timeout=15
                 )
-                print(f"[{self.name}] Kết quả gửi đơn Unban: {r.text}", flush=True)
+                print(f"[{self.name}] Kết quả gửi đơn Unban ({self.unban_email}): {r.text}", flush=True)
             except Exception as e:
                 print(f"[{self.name}] Lỗi gửi đơn Unban: {e}", flush=True)
 
